@@ -19,5 +19,10 @@ app.get('/', (req,res)=> {
     res.render('home', {layout:false})
 })
 
+app.get('/about', (req,res)=> {
+    res.render('about', {layout:false})
+})
+
+
 app.listen(5000, ()=>{console.log('Server is listening on port "http://localhost:5000"');
 })
