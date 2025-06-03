@@ -4,11 +4,14 @@
   "description": "SoftUni BackEnd Course Workshop",
   "main": "index.js",
   "scripts": {
-    "start" : "node src/index.js",
-    "dev" : "node --watch src/index.js"
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
   },
   "keywords": [],
   "type": "module",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
