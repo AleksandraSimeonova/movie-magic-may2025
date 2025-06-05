@@ -1,3 +1,5 @@
+import {v4 as uuid} from 'uuid';
+
 const movies = [
     {
         "id": "a3682672-0ee4-1284-8759-35ee253329zv",
@@ -41,13 +43,13 @@ export default {
 
     create(movieData){
         //add ID
+        movieData.id = uuid();
         movies.push(movieData)
         return movieData
     },
 
     
     getOne(movieId){
-
         const movie = movies.find(movie => movie.id === movieId);
         return movie
     }

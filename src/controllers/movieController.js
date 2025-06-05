@@ -1,5 +1,6 @@
 import express from 'express';
 import movieService from '../service/movieService.js';
+import {v4 as uuid} from 'uuid';
 
 const movieController = express.Router();
 
