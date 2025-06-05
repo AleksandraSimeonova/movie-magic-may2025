@@ -37,5 +37,11 @@ const movies = [
 export default {
     getAll(){
         return movies
+    },
+
+    create(movieData){
+        //add ID
+        movies.push(movieData)
+        return movieData
     }
 }

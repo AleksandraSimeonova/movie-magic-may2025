@@ -5,7 +5,9 @@ import movieController from './controllers/movieController.js';
 
 const app = express();
 
-app.use(express.static('./src/public'))
+app.use(express.static('./src/public'));
+
+app.use(express.urlencoded());
 
 app.engine('hbs', handlebars.engine({
     extname: 'hbs'
