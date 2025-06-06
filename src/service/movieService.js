@@ -56,6 +56,8 @@ export default {
     create(movieData){
         //add ID
         movieData.id = uuid();
+
+        movieData.rating = Number(movieData.rating)
         movies.push(movieData)
         return movieData
     },
