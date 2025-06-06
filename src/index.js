@@ -10,7 +10,12 @@ app.use(express.static('./src/public'));
 app.use(express.urlencoded());
 
 app.engine('hbs', handlebars.engine({
-    extname: 'hbs'
+    extname: 'hbs',
+    helpers: {
+        showRating(rating){
+            return '&#x2605;'.repeat(Math.floor(rating))
+        }
+    }
 }))
 
 app.set('view engine', 'hbs')
