@@ -37,8 +37,14 @@ const movies = [
 ];
 
 export default {
-    getAll(){
-        return movies
+    getAll(filter={}){
+        //Copy of the original, to not ruin original ar
+        let result = movies.slice()
+        //if exist filter
+        if(filter.search){
+        result = result.filter(movie => movie.title.toLowerCase().includes(filter.search.toLowerCase()))
+        }
+        return result
     },
 
     create(movieData){
