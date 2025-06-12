@@ -1,4 +1,5 @@
 import {v4 as uuid} from 'uuid';
+import Movie from '../models/Movie.js';
 
 const movies = [
     {
@@ -37,9 +38,9 @@ const movies = [
 ];
 
 export default {
-    getAll(filter={}){
+    async getAll(filter={}){
         //Copy of the original, to not ruin original ar
-        let result = movies.slice()
+        let result = await Movie.find({}).lean()
         //if exist filter
         if(filter.search){
         result = result.filter(movie => movie.title.toLowerCase().includes(filter.search.toLowerCase()))
@@ -55,11 +56,12 @@ export default {
 
     create(movieData){
         //add ID
-        movieData.id = uuid();
+      /// movieData.id = uuid();
 
-        movieData.rating = Number(movieData.rating)
-        movies.push(movieData)
-        return movieData
+      const movie = new Movie(movieData);
+
+      // promise
+      return movie.save()
     },
 
     

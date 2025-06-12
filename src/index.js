@@ -21,7 +21,7 @@ app.engine('hbs', handlebars.engine({
 
 
 try{
-    mongoose.connect('mongodb://localhost:2701', {dbName: 'magic-movies-may2025'})
+    mongoose.connect('mongodb://localhost:27017', {dbName: 'magic-movies-may2025'})
     console.log('Connected to DB');
     
 }catch(err){
