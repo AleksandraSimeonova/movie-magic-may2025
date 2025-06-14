@@ -1,7 +1,12 @@
 import Cast from "../models/Cast.js";
 
 export default {
-    create(castData){
+    getAll() {
+        return Cast.find()
+
+    },
+    create(castData) {
         return Cast.create(castData)
     }
+
 }
