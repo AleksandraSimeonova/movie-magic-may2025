@@ -55,7 +55,7 @@ movieController.post('/:movieId/attach', async (req, res) => {
 
     await movieService.attach(movieId, castId)
 
-    res.redirect(`movies/${movieId}/details`)
+    res.redirect(`/movies/${movieId}/details`) /////movies/${movieId}/details
 })
 
 
