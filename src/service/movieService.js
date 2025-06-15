@@ -4,19 +4,23 @@ import Cast from '../models/Cast.js';
 
 export default {
     async getAll(filter={}){
-        //Copy of the original, to not ruin original ar
-        let result = await Movie.find({})
-        //if exist filter
-        if(filter.search){
-        result = result.filter(movie => movie.title.toLowerCase().includes(filter.search.toLowerCase()))
+      let query = Movie.find();
+
+        if (filter.search) {
+            query = query.find({ title: { $regex: new RegExp(filter.search, 'i') } })
         }
-        if(filter.genre){
-        result = result.filter(movie => movie.genre.toLowerCase() === (filter.genre.toLowerCase()))
+
+        if (filter.genre) {
+            query = query.find({ genre: filter.genre.toLowerCase() })
         }
-        if(filter.year){
-        result = result.filter(movie => movie.year === (filter.year))
+
+        if (filter.year) {
+            // query = query.find({ year: filter.year });
+            query = query.where('year').equals(filter.year);
         }
-        return result
+
+        return query;
+
     },
 
     create(movieData){

@@ -32,7 +32,7 @@ movieController.get('/search', async (req, res) => {
     //Get query 
     const filter = req.query
     console.log(filter);
-
+    
     const movies = await movieService.getAll(filter);
 
     res.render('search', { movies, filter });
