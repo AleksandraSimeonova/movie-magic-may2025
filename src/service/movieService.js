@@ -33,6 +33,12 @@ export default {
     async getOne(movieId){
         const movie = await Movie.findById(movieId);
         return movie
+    },
+
+    async attach(movieId, castId){
+        const movie = await this.getOne(movieId);
+        movie.casts.push(castId);
+        return movie.save();
     }
 
 }
