@@ -17,7 +17,7 @@ const castSchema = new Schema({
     },
     imageUrl: {
         type: String,
-        validate: [/^https?:\/\//, 'Invalid Image URL!'],
+        ///validate: [/^https?:\/\//, 'Invalid Image URL!'],
         required: true,
         
     }
