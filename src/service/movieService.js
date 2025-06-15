@@ -31,7 +31,7 @@ export default {
 
     
     async getOne(movieId){
-        const movie = await Movie.findById(movieId);
+        const movie = await Movie.findById(movieId).populate('casts');
         return movie
     },
 
