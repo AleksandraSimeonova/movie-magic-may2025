@@ -53,6 +53,9 @@ export default {
 
         return casts
         
-    }
+    },
+    async delete(movieId) {
+        return Movie.findByIdAndDelete(movieId);
+    },
 
 }
