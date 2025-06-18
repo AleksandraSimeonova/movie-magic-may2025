@@ -23,11 +23,12 @@ export default {
 
     },
 
-    create(movieData){
+    create(movieData, userId){
         //add ID
       /// movieData.id = uuid();
 
       const movie = new Movie(movieData);
+      movie.owner = userId;
 
       // promise
       return movie.save()
