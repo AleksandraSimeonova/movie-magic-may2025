@@ -59,6 +59,6 @@ export default {
     },
     update(movieId, movieData) {
         return Movie.findByIdAndUpdate(movieId, movieData);
-    }
+    },
 
 }
