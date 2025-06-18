@@ -1,5 +1,6 @@
 import { Router } from "express";
 import userService from "../service/userService.js";
+import cookieParser from "cookie-parser";
 
 const userController = Router();
 
@@ -31,7 +32,7 @@ userController.post('/login', async (req,res) => {
 
     const token = await userService.login(email, password);
 
-    console.log(token);
+    res.cookie('auth', token);
     
 
     res.redirect('/'); 

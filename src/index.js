@@ -5,12 +5,16 @@ import homeController from './controllers/homeController.js';
 import movieController from './controllers/movieController.js';
 import castController from './controllers/castController.js';
 import userController from './controllers/userControler.js';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
+//Middlewares
 app.use(express.static('./src/public'));
 //for saving details
 app.use(express.urlencoded());
+//set cookie parser
+app.use(cookieParser());
 
 app.engine('hbs', handlebars.engine({
     extname: 'hbs',

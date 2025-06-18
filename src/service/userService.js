@@ -13,7 +13,6 @@ export default {
     async login(email, password){
 
        const user = await User.findOne({email});
-console.log(user);
 
        if(!user){
         return new Error(`No such user!`)
@@ -32,7 +31,7 @@ console.log(user);
 
        const token = jsonwebtoken.sign(payload, jwtSecret, {expiresIn: '2h'});
 
-
+       
        return token
 
 
