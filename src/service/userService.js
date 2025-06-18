@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import jsonwebtoken from 'jsonwebtoken';
+import { jwtSecret } from "../config/general.js";
 
 
-const jwtSecret = 'kajfkjasndfkjnfKJFKfjSFNADLAD'
 
 export default {
 
