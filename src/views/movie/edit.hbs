@@ -11,19 +11,17 @@
                 <h2>Edit Post</h2>
                 <ul class="noBullet">
                     <li>
-                        <label for="title">Title:</label>
+                        <label for="title">Title: {{pageTitle}}</label>
                         <input type="text" class="inputFields" id="title" name="title" value="{{movie.title}}" />
                     </li>
                     <li>
                         <label for="category">Category:</label>
                         <select id="category" class="inputFields" name="category">
-                            <option value="">Select Category</option>
-                            <option value="tv-show">TV Show</option>
-                            <option value="animation">Animation</option>
-                            <option value="movie" selected>Movie</option>
-                            <option value="documentary">Documentary</option>
-                            <option value="short-film">Short Film</option>
-                        </select>
+                        <option value="">Select Category</option>
+                        {{#each categoryOptions}}
+                        <option value="{{value}}" {{selected}}>{{title}}</option>
+                        {{/each}}
+                    </select>
                     </li>
                     <li>
                         <label for="genre">Genre:</label>

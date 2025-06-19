@@ -79,6 +79,20 @@ movieController.get('/:movieId/delete', async (req, res) => {
     res.redirect('/');
 });
 
+function getCategoryOptionsViewData(category) {
+    const options = [
+        { value: 'tv-show', title: 'TV Show' },
+        { value: 'animation', title: 'Animation' },
+        { value: 'movie', title: 'Movie' },
+        { value: 'documentary', title: 'Documentary' },
+        { value: 'short-film', title: 'Short Film' },
+    ];
+
+    const result = options.map(option => ({ ...option, selected: category === option.value ? 'selected' : '' }));
+
+    return result;
+}
+
 
 movieController.get('/:movieId/edit', async (req, res) => {
     // Get movie id
@@ -98,8 +112,9 @@ movieController.get('/:movieId/edit', async (req, res) => {
         return res.status(403).end();
     }
 
+    const categoryOptionsViewData = getCategoryOptionsViewData(movie.category);
 
-    res.render('movie/edit', {movie})
+    res.render('movie/edit', {movie, categoryOptions: categoryOptionsViewData, pageTitle: 'Edit'})
 
 });
 
