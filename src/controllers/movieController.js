@@ -9,18 +9,24 @@ import { isAuth } from '../middlewares/authMiddleware.js';
 const movieController = express.Router();
 
 movieController.get('/create', isAuth, (req, res) => {
-    res.render('create', {pageTitle: 'Create'});
+    res.render('movie/create', { pageTitle: 'Create' });
 });
 
 movieController.post('/create', isAuth, async (req, res) => {
     const newMovie = req.body;
-
     const userId = req.user?.id;
-    //Save movie
-    await movieService.create(newMovie, userId);
-    //redirect
-    res.redirect('/');
+    try {
 
+        //Save movie
+        await movieService.create(newMovie, userId);
+        //redirect
+        res.redirect('/', {
+            error: getErrorMessage(err),
+            movie: newMovie,
+        });
+    } catch (err) {
+        res.redirect('movie/create');
+    }
 })
 
 movieController.get('/:movieId/details', async (req, res) => {
@@ -28,12 +34,12 @@ movieController.get('/:movieId/details', async (req, res) => {
 
     // Get current user
     const userId = req.user?.id;
-    
+
     const movie = await movieService.getOne(movieId);
 
     const casts = await movieService.getCasts(movieId);
 
-     // Verify if user is owner
+    // Verify if user is owner
     const isOwner = movie.owner?.equals(userId);
 
     res.render('movie/details', { movie, casts, isOwner });
@@ -43,28 +49,28 @@ movieController.get('/search', async (req, res) => {
     //Get query 
     const filter = req.query
     console.log(filter);
-    
+
     const movies = await movieService.getAll(filter);
 
     res.render('search', { movies, filter });
 });
 
 movieController.get('/:movieId/attach', isAuth, async (req, res) => {
-    
+
     const movieId = req.params.movieId;
 
     const casts = await castService.getAll()
 
     const movie = await movieService.getOne(movieId)
 
-    res.render('movie/attach', {movie, casts})
+    res.render('movie/attach', { movie, casts })
 });
 
 movieController.post('/:movieId/attach', isAuth, async (req, res) => {
-    
+
     const movieId = req.params.movieId;
 
-    const castId =  req.body.cast
+    const castId = req.body.cast
 
     await movieService.attach(movieId, castId)
 
@@ -105,7 +111,7 @@ movieController.get('/:movieId/edit', isAuth, async (req, res) => {
 
     const categoryOptionsViewData = getCategoryOptionsViewData(movie.category);
 
-    res.render('movie/edit', {movie, categoryOptions: categoryOptionsViewData, pageTitle: 'Edit'})
+    res.render('movie/edit', { movie, categoryOptions: categoryOptionsViewData, pageTitle: 'Edit' })
 
 });
 
