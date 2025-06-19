@@ -12,7 +12,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         require: true,
-        validate: [/^[a-zA-Z0-9]$/, 'Password should be alphanumeric!'],
+        validate: [/^[a-zA-Z0-9]+$/, 'Password should be alphanumeric!'],
         minLength:[6, 'Password shoud be at least 6 characters long!']
     },
 });
