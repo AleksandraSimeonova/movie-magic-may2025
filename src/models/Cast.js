@@ -4,12 +4,14 @@ const castSchema = new Schema({
     name: {
         type: String,
         required: true,
+        minLengh: [5, 'Name is too short!'],
+        validate: [validCharactersPattern, 'Only engilsh letters, digits and whitespace are allowed!'],
     },
     age: {
         type: Number,
         required: true,
-        min: 12,
-        max: 120,
+          min: [1, 'Age should be at least 1 years old'],
+        max: [120, 'Age should be less than 120 years old'],
     },
     born: { 
         type: String,
