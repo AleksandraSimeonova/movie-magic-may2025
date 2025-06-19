@@ -25,13 +25,13 @@ export default {
        const user = await User.findOne({email});
 
        if(!user){
-        return new Error(`No such user!`)
+        throw new Error(`No such user!`)
        };
 
        const isValid = await bcrypt.compare(password, user.password);
 
        if(!isValid){
-         return new Error('Not valid pass')
+         throw new Error('Not valid pass')
         };
 
        const token = generateAuthToken(user)
