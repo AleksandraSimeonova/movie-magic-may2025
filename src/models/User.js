@@ -22,6 +22,13 @@ userSchema.pre('save', async function () {
     this.password = await bcrypt.hash(this.password, salt);
 })
 
+userSchema.virtual('rePassword')
+.set(function(value){
+    if(this.password !== value){
+        throw new Error('Password missmatch!')
+    }
+})
+
 const User = model('User', userSchema);
 
 export default User
