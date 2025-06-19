@@ -8,7 +8,7 @@ import getCategoryOptionsViewData from '../utils/movieUtils.js';
 const movieController = express.Router();
 
 movieController.get('/create', (req, res) => {
-    res.render('create');
+    res.render('create', {pageTitle: 'Create'});
 });
 
 movieController.post('/create', async (req, res) => {
