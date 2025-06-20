@@ -2,6 +2,7 @@ import express from 'express';
 import handlebars from 'express-handlebars'
 import mongoose from 'mongoose';
 import routes from './routes.js';
+import session from 'express-session'
 
 import cookieParser from 'cookie-parser';
 import { auth } from './middlewares/authMiddleware.js';
@@ -11,10 +12,21 @@ const app = express();
 
 //Middlewares
 app.use(express.static('./src/public'));
+
 //for saving details
 app.use(express.urlencoded());
+
 //set cookie parser
 app.use(cookieParser());
+
+// Add session
+app.use(session({
+    secret: 'DASKHWIUAHD&WS*(#@(DN&Q#*(Q#H&*(DHGQ&DH#Q&*GD',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false, httpOnly: true }
+}));
+
 //middleware for check cookie auth
 app.use(auth);
 

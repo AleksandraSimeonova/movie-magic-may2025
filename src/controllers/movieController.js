@@ -20,12 +20,15 @@ movieController.post('/create', isAuth, async (req, res) => {
         //Save movie
         await movieService.create(newMovie, userId);
         //redirect
-        res.redirect('/', {
+        res.redirect('/');
+    } catch (err) {
+             // Prepare view data
+        const categoryOptionsViewData = getCategoryOptionsViewData(newMovie.category);
+        res.redirect('movie/create', {
             error: getErrorMessage(err),
             movie: newMovie,
+            categoryOptions: categoryOptionsViewData,
         });
-    } catch (err) {
-        res.redirect('movie/create');
     }
 })
 
@@ -41,7 +44,7 @@ movieController.get('/:movieId/details', async (req, res) => {
 
     // Verify if user is owner
     const isOwner = movie.owner?.equals(userId);
-
+ 
     res.render('movie/details', { movie, casts, isOwner });
 })
 
@@ -104,10 +107,11 @@ movieController.get('/:movieId/edit', isAuth, async (req, res) => {
     // check if owner
     const isOwner = movie.owner?.equals(userId);
 
-    if (!isOwner) {
-        // TODO: Add error handling
-        return res.status(403).end();
+     if (!isOwner) {
+        return res.render('404', { error: 'You don\' have access to edit this movie' });
+       /// return res.dataRedirect('/404', { error: 'You don\' have access to edit this movie' });
     }
+
 
     const categoryOptionsViewData = getCategoryOptionsViewData(movie.category);
 
